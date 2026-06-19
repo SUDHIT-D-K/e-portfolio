@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sudhit D Kaller — B.Tech CSE (AI & Data Science) at REVA University. Building intelligent AI solutions, exploring data science pipelines, and engineering real-world software applications." />
+  <title>Sudhit D Kaller | AI & Data Science Engineer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+            display: ['Syne', 'sans-serif'],
+          },
+          colors: {
+            canvas: '#F5F2ED',
+            ink: '#0D0D0D',
+            border: '#0D0D0D',
+            accent: '#FF5733',
+            accent2: '#5B21B6',
+            accent3: '#0EA5E9',
+            accent4: '#16A34A',
+            muted: '#6B7280',
+            card: '#FAFAF8',
+          },
+          boxShadow: {
+            brutal: '4px 4px 0px #0D0D0D',
+            'brutal-lg': '6px 6px 0px #0D0D0D',
+            'brutal-xl': '8px 8px 0px #0D0D0D',
+            'brutal-sm': '2px 2px 0px #0D0D0D',
+            'brutal-accent': '4px 4px 0px #FF5733',
+            'brutal-purple': '4px 4px 0px #5B21B6',
+            'brutal-blue': '4px 4px 0px #0EA5E9',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ===== BASE RESET & SCROLLBAR ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #F5F2ED;
+      color: #0D0D0D;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F5F2ED; }
+    ::-webkit-scrollbar-thumb { background: #0D0D0D; border-radius: 0; }
+
+    /* ===== BENTO GRID ===== */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    /* ===== CARD BASE ===== */
+    .bento-card {
+      background: #FAFAF8;
+      border: 2px solid #0D0D0D;
+      border-radius: 0px;
+      padding: 28px;
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0px #0D0D0D;
+    }
+
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 85%, rgba(13,13,13,0.04) 100%);
+      pointer-events: none;
+    }
+
+    /* ===== GRID SPANS ===== */
+    .col-span-full  { grid-column: span 12; }
+    .col-span-8     { grid-column: span 8; }
+    .col-span-7     { grid-column: span 7; }
+    .col-span-6     { grid-column: span 6; }
+    .col-span-5     { grid-column: span 5; }
+    .col-span-4     { grid-column: span 4; }
+    .col-span-3     { grid-column: span 3; }
+
+    /* ===== SKILL BADGE ===== */
+    .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 2px solid #0D0D0D;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: #F5F2ED;
+      cursor: default;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    .skill-badge:hover {
+      background: #0D0D0D;
+      color: #F5F2ED;
+      transform: translate(-2px, -2px);
+      box-shadow: 3px 3px 0px #FF5733;
+    }
+
+    .skill-badge .proficiency-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+      transition: opacity 0.15s;
+    }
+
+    .skill-badge:hover .proficiency-dot { opacity: 1; }
+
+    /* ===== TOOLTIP ===== */
+    .has-tooltip { position: relative; }
+    .has-tooltip .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #0D0D0D;
+      color: #F5F2ED;
+      font-size: 10px;
+      font-family: 'Space Mono', monospace;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border: 1px solid #F5F2ED;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+      z-index: 10;
+    }
+    .has-tooltip:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== ACCENT CARD VARIANTS ===== */
+    .card-accent-orange { background: #FF5733; color: #FAFAF8; border-color: #0D0D0D; }
+    .card-accent-purple { background: #5B21B6; color: #FAFAF8; border-color: #0D0D0D; }
+    .card-accent-blue   { background: #0EA5E9; color: #0D0D0D; border-color: #0D0D0D; }
+    .card-accent-dark   { background: #0D0D0D; color: #F5F2ED; border-color: #0D0D0D; }
+    .card-accent-green  { background: #16A34A; color: #FAFAF8; border-color: #0D0D0D; }
+
+    /* ===== ROADMAP STEPS ===== */
+    .roadmap-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px dashed rgba(250,250,248,0.25);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .roadmap-step:last-child { border-bottom: none; }
+    .roadmap-step:hover { padding-left: 8px; }
+    .roadmap-step .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border: 2px solid rgba(250,250,248,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.18s;
+    }
+    .roadmap-step:hover .step-num {
+      background: rgba(250,250,248,0.15);
+      border-color: #FAFAF8;
+    }
+
+    /* ===== SOCIAL BUTTON ===== */
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 2px solid #0D0D0D;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #0D0D0D;
+      background: #FAFAF8;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+    .social-btn:hover {
+      background: #0D0D0D;
+      color: #FAFAF8;
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px #FF5733;
+    }
+
+    /* ===== NOISE TEXTURE ===== */
+    .noise-bg {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    /* ===== ANIMATED CURSOR DOT ===== */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: #FF5733;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s, opacity 0.2s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 2px solid #0D0D0D;
+      border-radius: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.2s, height 0.2s, border-color 0.2s;
+    }
+
+    /* ===== NAV ===== */
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: #0D0D0D;
+      padding: 6px 12px;
+      border: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .nav-link:hover {
+      border-color: #0D0D0D;
+      background: #0D0D0D;
+      color: #F5F2ED;
+    }
+
+    /* ===== TICKER ===== */
+    .ticker-track {
+      display: flex;
+      animation: ticker-scroll 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+
+    /* ===== PROJECT CARD ===== */
+    .project-card {
+      background: #FAFAF8;
+      border: 2px solid #0D0D0D;
+      padding: 24px;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: #FF5733;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .project-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 6px 6px 0px #0D0D0D;
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+
+    /* ===== TECH TAG ===== */
+    .tech-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      border: 1.5px solid #0D0D0D;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== VIEW REPO BUTTON ===== */
+    .view-repo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #0D0D0D;
+      color: #FAFAF8;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid #0D0D0D;
+      letter-spacing: 0.04em;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .view-repo-btn:hover {
+      background: #FF5733;
+      border-color: #FF5733;
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px #0D0D0D;
+    }
+    .view-repo-btn svg { transition: transform 0.15s; }
+    .view-repo-btn:hover svg { transform: translate(3px, -3px); }
+
+    /* ===== PULSE ANIMATION ===== */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: #16A34A;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    /* ===== FLOATING LABEL ===== */
+    @keyframes float-label {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-6px); }
+    }
+    .float-label { animation: float-label 3.5s ease-in-out infinite; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .col-span-8, .col-span-7, .col-span-5, .col-span-4, .col-span-3 {
+        grid-column: span 6;
+      }
+    }
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr; gap: 12px; }
+      .col-span-full, .col-span-8, .col-span-7, .col-span-6,
+      .col-span-5, .col-span-4, .col-span-3 { grid-column: span 1; }
+      .bento-card { padding: 20px; }
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+
+    /* ===== SECTION MARKER ===== */
+    .section-marker {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    /* ===== GLITCH TEXT ===== */
+    @keyframes glitch-clip-1 {
+      0%   { clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); transform: translate(-2px); }
+      50%  { clip-path: polygon(0 55%, 100% 55%, 100% 70%, 0 70%); transform: translate(2px); }
+      100% { clip-path: polygon(0 5%,  100% 5%,  100% 20%, 0 20%); transform: translate(-2px); }
+    }
+    @keyframes glitch-clip-2 {
+      0%   { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translate(2px);  }
+      50%  { clip-path: polygon(0 25%, 100% 25%, 100% 40%, 0 40%); transform: translate(-2px); }
+      100% { clip-path: polygon(0 70%, 100% 70%, 100% 90%, 0 90%); transform: translate(2px);  }
+    }
+    .glitch-container { position: relative; display: inline-block; }
+    .glitch-container::before,
+    .glitch-container::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      font: inherit;
+      opacity: 0;
+    }
+    .glitch-container:hover::before {
+      color: #FF5733;
+      animation: glitch-clip-1 0.3s steps(1) infinite;
+      opacity: 0.7;
+    }
+    .glitch-container:hover::after {
+      color: #0EA5E9;
+      animation: glitch-clip-2 0.3s steps(1) infinite;
+      opacity: 0.7;
+    }
+
+    /* ===== SCROLL FADE IN ===== */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== CONTACT INPUT ===== */
+    .contact-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(250,250,248,0.3);
+      color: #FAFAF8;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-input::placeholder { color: rgba(250,250,248,0.4); }
+    .contact-input:focus { border-color: #FF5733; }
+
+    /* ===== STAT NUMBER ===== */
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+  </style>
+</head>
+
+<body class="noise-bg">
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="sticky top-0 z-50 border-b-2 border-ink bg-canvas/95 backdrop-blur-sm">
+    <div class="max-w-[1400px] mx-auto px-6 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 no-underline" style="text-decoration:none;">
+        <div class="w-9 h-9 bg-ink flex items-center justify-center border-2 border-ink"
+             style="box-shadow: 3px 3px 0px #FF5733;">
+          <span class="text-canvas font-display font-bold text-sm">SDK</span>
+        </div>
+        <span class="font-display font-bold text-ink hidden sm:block tracking-tight">Sudhit D Kaller</span>
+      </a>
+
+      <!-- Nav Links -->
+      <div class="flex items-center gap-1">
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#skills"   class="nav-link">Skills</a>
+        <a href="#mediscan" class="nav-link">Startup</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact"  class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="max-w-[1400px] mx-auto px-6 py-8">
+    <div class="bento-grid">
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 1: HERO + STATUS
+      ═══════════════════════════════════════════════════ -->
+
+      <!-- HERO CARD (main) -->
+      <div id="hero" class="bento-card card-accent-dark col-span-8 fade-in-up"
+           style="box-shadow: 6px 6px 0px #FF5733; min-height: 300px;"
+           aria-label="Hero introduction card">
+
+        <!-- Animated grid pattern overlay -->
+        <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(245,242,237,0.04) 0px,rgba(245,242,237,0.04) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(245,242,237,0.04) 0px,rgba(245,242,237,0.04) 1px,transparent 1px,transparent 40px);pointer-events:none;"></div>
+
+        <div class="relative z-10 h-full flex flex-col justify-between" style="min-height:260px;">
+          <div>
+            <div class="section-marker text-canvas/50 mb-4">◈ Portfolio 2026</div>
+            <div class="glitch-container" data-text="Sudhit D Kaller">
+              <h1 class="font-display font-extrabold text-canvas leading-none mb-2"
+                  style="font-size: clamp(2.4rem, 5vw, 4.2rem); letter-spacing: -0.03em;">
+                Sudhit D Kaller
+              </h1>
+            </div>
+            <p class="font-mono text-accent text-sm font-bold tracking-wider uppercase mb-4">
+              B.Tech CSE · AI &amp; Data Science · REVA University
+            </p>
+            <p class="text-canvas/80 font-sans text-base leading-relaxed max-w-xl">
+              Building intelligent AI solutions, exploring advanced data science pipelines,
+              and engineering real-world software applications.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 mt-6">
+            <span class="flex items-center gap-2 font-mono text-xs text-canvas/70">
+              <span class="pulse-dot"></span> Available for opportunities
+            </span>
+            <span class="text-canvas/30">|</span>
+            <a href="#contact" class="social-btn" style="border-color:rgba(250,250,248,0.3);background:rgba(250,250,248,0.08);color:#FAFAF8;"
+               id="hero-contact-btn">
+              Get in Touch ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS QUICK-INFO CARD -->
+      <div class="bento-card card-accent-orange col-span-4 fade-in-up"
+           style="animation-delay:0.1s;"
+           aria-label="Status and institution card">
+        <div class="section-marker text-white/60 mb-4">◈ Current Status</div>
+        <div class="float-label mb-5">
+          <div class="text-6xl mb-3">🎓</div>
+        </div>
+        <div>
+          <p class="font-display font-bold text-white text-xl leading-tight mb-1">REVA University</p>
+          <p class="font-mono text-white/70 text-xs uppercase tracking-widest mb-4">Bengaluru, India</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2 font-mono text-xs text-white/90">
+              <span class="text-white">▸</span> B.Tech CSE (AI &amp; DS)
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs text-white/90">
+              <span class="text-white">▸</span> 2022 – 2026 Batch
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs text-white/90">
+              <span class="text-white">▸</span> Building MediScan.ai
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           TICKER TAPE (full width)
+      ═══════════════════════════════════════════════════ -->
+      <div class="col-span-full border-y-2 border-ink overflow-hidden py-3 bg-ink fade-in-up"
+           style="animation-delay:0.15s;" aria-label="Skills ticker">
+        <div class="ticker-track font-mono text-canvas/70 text-xs font-bold uppercase tracking-widest select-none">
+          <span class="mx-8">✦ Python</span>
+          <span class="mx-8">✦ Machine Learning</span>
+          <span class="mx-8">✦ Deep Learning</span>
+          <span class="mx-8">✦ Data Science</span>
+          <span class="mx-8">✦ C Programming</span>
+          <span class="mx-8">✦ SQL</span>
+          <span class="mx-8">✦ Arduino</span>
+          <span class="mx-8">✦ ESP32</span>
+          <span class="mx-8">✦ MediScan.ai</span>
+          <span class="mx-8">✦ HealthTech AI</span>
+          <span class="mx-8">✦ REVA University</span>
+          <span class="mx-8">✦ Linux</span>
+          <span class="mx-8">✦ Git / GitHub</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="mx-8">✦ Python</span>
+          <span class="mx-8">✦ Machine Learning</span>
+          <span class="mx-8">✦ Deep Learning</span>
+          <span class="mx-8">✦ Data Science</span>
+          <span class="mx-8">✦ C Programming</span>
+          <span class="mx-8">✦ SQL</span>
+          <span class="mx-8">✦ Arduino</span>
+          <span class="mx-8">✦ ESP32</span>
+          <span class="mx-8">✦ MediScan.ai</span>
+          <span class="mx-8">✦ HealthTech AI</span>
+          <span class="mx-8">✦ REVA University</span>
+          <span class="mx-8">✦ Linux</span>
+          <span class="mx-8">✦ Git / GitHub</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 2: ABOUT + INTERESTS STATS
+      ═══════════════════════════════════════════════════ -->
+
+      <!-- ABOUT CARD -->
+      <div id="about" class="bento-card col-span-7 fade-in-up" style="animation-delay:0.2s;"
+           aria-label="About Sudhit card">
+        <div class="section-marker mb-4">◈ About Me</div>
+        <h2 class="font-display font-extrabold text-2xl mb-4 leading-tight">
+          Engineering at the Intersection of<br/>
+          <span class="text-accent">AI, Data Science</span> &amp; Software
+        </h2>
+        <p class="text-ink/70 leading-relaxed mb-4">
+          I'm a Computer Science Engineering student at <strong>REVA University</strong> specializing
+          in <strong>Artificial Intelligence &amp; Data Science</strong>. My academic journey has given me
+          a strong foundation in both theoretical concepts and hands-on engineering.
+        </p>
+        <p class="text-ink/70 leading-relaxed mb-5">
+          Beyond coursework, I actively build real-world software, experiment with hardware prototyping
+          on Arduino and ESP32, and conceptualize AI-first products like <strong>MediScan.ai</strong> —
+          my healthcare intelligence startup concept.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag bg-ink text-canvas">Machine Learning</span>
+          <span class="tech-tag">Deep Learning</span>
+          <span class="tech-tag">HealthTech AI</span>
+          <span class="tech-tag">Adv. Eng. Mathematics</span>
+          <span class="tech-tag">Embedded Systems</span>
+        </div>
+      </div>
+
+      <!-- STATS STACK (2 small cards) -->
+      <div class="col-span-5 flex flex-col gap-4 fade-in-up" style="animation-delay:0.25s;">
+        <!-- Stat 1 -->
+        <div class="bento-card card-accent-purple flex-1" style="box-shadow: 4px 4px 0px #0D0D0D;">
+          <div class="section-marker text-white/50 mb-2">◈ Research Focus</div>
+          <div class="stat-number text-white mb-1">4+</div>
+          <p class="font-mono text-xs text-white/70 uppercase tracking-wider">Core Research Domains</p>
+          <div class="mt-3 flex flex-col gap-1">
+            <span class="font-mono text-xs text-white/80">→ ML / Deep Learning</span>
+            <span class="font-mono text-xs text-white/80">→ HealthTech AI</span>
+            <span class="font-mono text-xs text-white/80">→ Data Pipelines</span>
+            <span class="font-mono text-xs text-white/80">→ Hardware / IoT</span>
+          </div>
+        </div>
+        <!-- Stat 2 -->
+        <div class="bento-card card-accent-blue flex-1" style="box-shadow: 4px 4px 0px #0D0D0D;">
+          <div class="section-marker text-ink/50 mb-2">◈ Languages Spoken</div>
+          <div class="stat-number text-ink mb-1">3+</div>
+          <p class="font-mono text-xs text-ink/70 uppercase tracking-wider">Programming Languages</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="tech-tag border-ink/40">Python</span>
+            <span class="tech-tag border-ink/40">C</span>
+            <span class="tech-tag border-ink/40">SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 3: TECH STACK & SKILLS
+      ═══════════════════════════════════════════════════ -->
+
+      <div id="skills" class="bento-card col-span-full fade-in-up" style="animation-delay:0.3s;"
+           aria-label="Tech stack and skills grid">
+        <div class="section-marker mb-4">◈ Tech Stack &amp; Skills</div>
+        <h2 class="font-display font-extrabold text-2xl mb-6">
+          Tools &amp; Technologies
+          <span class="font-mono font-normal text-sm text-muted ml-3 normal-case tracking-normal">— hover a badge to see proficiency</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Core Languages -->
+          <div>
+            <p class="section-marker mb-3">Core Languages</p>
+            <div class="flex flex-col gap-2">
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#FF5733;"></span> Python
+                <span class="tooltip">Proficiency: Advanced</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#0EA5E9;"></span> C Programming
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#16A34A;"></span> SQL
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI & Data Science -->
+          <div>
+            <p class="section-marker mb-3">AI &amp; Data Science</p>
+            <div class="flex flex-col gap-2">
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#FF5733;"></span> Machine Learning
+                <span class="tooltip">Proficiency: Intermediate+</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#5B21B6;"></span> Deep Learning
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#0EA5E9;"></span> Data Pipelines
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Web & Systems -->
+          <div>
+            <p class="section-marker mb-3">Web &amp; Systems</p>
+            <div class="flex flex-col gap-2">
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#FF5733;"></span> HTML / CSS
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#0EA5E9;"></span> Tailwind CSS
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#16A34A;"></span> Linux
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#0D0D0D;"></span> Git / GitHub
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hardware / IoT -->
+          <div>
+            <p class="section-marker mb-3">Hardware / IoT</p>
+            <div class="flex flex-col gap-2">
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#16A34A;"></span> Arduino
+                <span class="tooltip">Proficiency: Intermediate</span>
+              </div>
+              <div class="has-tooltip skill-badge">
+                <span class="proficiency-dot" style="background:#0EA5E9;"></span> ESP32
+                <span class="tooltip">Proficiency: Learning</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 4: MEDISCAN.AI STARTUP HUB
+      ═══════════════════════════════════════════════════ -->
+
+      <!-- MediScan Branding Card -->
+      <div id="mediscan" class="bento-card card-accent-dark col-span-5 fade-in-up"
+           style="box-shadow: 6px 6px 0px #5B21B6; animation-delay:0.35s;"
+           aria-label="MediScan.ai startup concept">
+        <div class="section-marker text-white/50 mb-4">◈ Flagship Concept · Startup</div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 border-2 border-accent flex items-center justify-center text-2xl"
+               style="box-shadow: 3px 3px 0px #FF5733;">
+            🩺
+          </div>
+          <div>
+            <h2 class="font-display font-extrabold text-canvas text-2xl leading-tight">MediScan<span class="text-accent">.ai</span></h2>
+            <p class="font-mono text-xs text-canvas/50 uppercase tracking-wider">AI-Powered HealthTech Platform</p>
+          </div>
+        </div>
+        <p class="text-canvas/75 text-sm leading-relaxed mb-5">
+          An intelligent healthcare platform focused on <strong class="text-canvas">preliminary health analysis</strong>
+          and <strong class="text-canvas">early disease detection</strong> — leveraging cutting-edge AI models
+          to bridge the gap between patients and timely clinical insights.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tech-tag border-white/30 text-white/80">HealthTech</span>
+          <span class="tech-tag border-white/30 text-white/80">Medical AI</span>
+          <span class="tech-tag border-white/30 text-white/80">Early Detection</span>
+          <span class="tech-tag border-white/30 text-white/80">Computer Vision</span>
+        </div>
+      </div>
+
+      <!-- MediScan Roadmap Card -->
+      <div class="bento-card card-accent-purple col-span-7 fade-in-up"
+           style="box-shadow: 6px 6px 0px #0D0D0D; animation-delay:0.4s;"
+           aria-label="MediScan.ai development roadmap">
+        <div class="section-marker text-white/50 mb-4">◈ Development Roadmap</div>
+        <h3 class="font-display font-bold text-white text-lg mb-4">MediScan.ai · Build Path</h3>
+
+        <div id="roadmapContainer">
+          <!-- Step 1 -->
+          <div class="roadmap-step" data-step="1" tabindex="0" role="button"
+               aria-label="Roadmap step 1: Research & Dataset Curation">
+            <div class="step-num text-white">01</div>
+            <div>
+              <p class="font-mono text-sm font-bold text-white mb-1">Research &amp; Dataset Curation</p>
+              <p class="text-white/60 text-xs">Identifying medical imaging datasets (X-ray, MRI, CT). Establishing ethical data handling protocols.</p>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="roadmap-step" data-step="2" tabindex="0" role="button"
+               aria-label="Roadmap step 2: AI Model Architecture">
+            <div class="step-num text-white">02</div>
+            <div>
+              <p class="font-mono text-sm font-bold text-white mb-1">AI Model Architecture Design</p>
+              <p class="text-white/60 text-xs">CNN-based classifiers and transformer models for multi-modal disease detection pipelines.</p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="roadmap-step" data-step="3" tabindex="0" role="button"
+               aria-label="Roadmap step 3: Platform MVP">
+            <div class="step-num text-white">03</div>
+            <div>
+              <p class="font-mono text-sm font-bold text-white mb-1">Platform MVP Development</p>
+              <p class="text-white/60 text-xs">Building the web-based patient interface, report generation engine, and secure doctor-patient portal.</p>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="roadmap-step" data-step="4" tabindex="0" role="button"
+               aria-label="Roadmap step 4: Clinical Validation">
+            <div class="step-num text-white">04</div>
+            <div>
+              <p class="font-mono text-sm font-bold text-white mb-1">Clinical Validation &amp; Launch</p>
+              <p class="text-white/60 text-xs">Partnering with medical institutions for validation, regulatory compliance, and public beta rollout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 5: PROJECTS SHOWCASE
+      ═══════════════════════════════════════════════════ -->
+
+      <div id="projects" class="col-span-full fade-in-up" style="animation-delay:0.45s;">
+        <div class="bento-card" style="padding-bottom:8px;">
+          <div class="section-marker mb-2">◈ Projects Showcase</div>
+          <h2 class="font-display font-extrabold text-2xl mb-1">Featured Repositories</h2>
+          <p class="text-muted text-sm mb-6">Foundational engineering work and real-world implementations.</p>
+        </div>
+      </div>
+
+      <!-- Project Card: C Program Mini-Project -->
+      <div class="col-span-6 fade-in-up" style="animation-delay:0.5s;">
+        <article class="project-card h-full flex flex-col" aria-label="C Program Mini-Project">
+          <!-- Header tag -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="section-marker">◈ Project · 01</div>
+            <div class="w-8 h-8 border-2 border-ink flex items-center justify-center font-mono font-bold text-xs">C</div>
+          </div>
+
+          <h3 class="font-display font-bold text-xl mb-3 leading-tight">
+            C Program<br/>Mini-Project
+          </h3>
+
+          <p class="text-ink/70 text-sm leading-relaxed mb-4 flex-1">
+            A foundational software engineering project implementing core <strong>data structures</strong>
+            and <strong>algorithmic logic</strong> in C programming. Demonstrates proficiency in memory
+            management, pointer manipulation, file I/O, and structured problem-solving through modular code design.
+          </p>
+
+          <!-- Tech Stack Badges -->
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tech-tag bg-ink text-canvas">C Language</span>
+            <span class="tech-tag">Data Structures</span>
+            <span class="tech-tag">Algorithms</span>
+            <span class="tech-tag">Modular Design</span>
+          </div>
+
+          <!-- CTA Button -->
+          <!-- 🔧 TO CUSTOMIZE: Replace the href below with your actual GitHub repository URL -->
+          <a href="https://github.com/SUDHIT-D-K/C-program-Mini-project.git"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="view-repo-btn w-full justify-center"
+             id="c-project-repo-btn"
+             aria-label="View C Program Mini-Project repository on GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            View Repository ↗
+          </a>
+        </article>
+      </div>
+
+      <!-- Placeholder / Coming Soon Card -->
+      <div class="col-span-6 fade-in-up" style="animation-delay:0.55s;">
+        <div class="project-card h-full flex flex-col items-center justify-center text-center"
+             style="border-style: dashed; background: transparent; min-height: 280px;"
+             aria-label="More projects coming soon">
+          <div class="text-5xl mb-4 opacity-30">⚡</div>
+          <p class="font-display font-bold text-xl text-ink/30 mb-2">More Coming Soon</p>
+          <p class="font-mono text-xs text-muted uppercase tracking-widest">
+            MediScan.ai MVP · ML Experiments · IoT Projects
+          </p>
+          <!-- 🔧 TO CUSTOMIZE: Replace with your GitHub profile URL -->
+          <a href="https://github.com/SUDHIT-D-K"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="social-btn mt-6"
+             id="github-profile-btn"
+             aria-label="View all repositories on GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            All Repositories
+          </a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           ROW 6: CONTACT & SOCIALS
+      ═══════════════════════════════════════════════════ -->
+
+      <!-- Contact Form Card -->
+      <div id="contact" class="bento-card card-accent-dark col-span-7 fade-in-up"
+           style="box-shadow: 6px 6px 0px #FF5733; animation-delay:0.6s;"
+           aria-label="Contact form">
+        <div class="section-marker text-white/50 mb-4">◈ Get In Touch</div>
+        <h2 class="font-display font-extrabold text-2xl text-canvas mb-6 leading-tight">
+          Let's Build Something<br/><span class="text-accent">Extraordinary</span> Together
+        </h2>
+
+        <form id="contactForm" onsubmit="handleFormSubmit(event)" novalidate>
+          <div class="mb-5">
+            <label class="font-mono text-xs text-canvas/50 uppercase tracking-widest block mb-1" for="contactName">Name</label>
+            <input id="contactName" type="text" required placeholder="Your name"
+                   class="contact-input" autocomplete="name" />
+          </div>
+          <div class="mb-5">
+            <label class="font-mono text-xs text-canvas/50 uppercase tracking-widest block mb-1" for="contactEmail">Email</label>
+            <input id="contactEmail" type="email" required placeholder="your@email.com"
+                   class="contact-input" autocomplete="email" />
+          </div>
+          <div class="mb-6">
+            <label class="font-mono text-xs text-canvas/50 uppercase tracking-widest block mb-1" for="contactMsg">Message</label>
+            <textarea id="contactMsg" rows="3" required placeholder="What's on your mind?"
+                      class="contact-input resize-none" style="border-bottom-width:2px;"></textarea>
+          </div>
+          <button type="submit" class="view-repo-btn w-full justify-center" id="contact-submit-btn"
+                  style="background:#FF5733;border-color:#FF5733;color:#FAFAF8;">
+            Send Message ↗
+          </button>
+          <p id="formSuccess" class="hidden mt-4 font-mono text-xs text-accent text-center">
+            ✓ Message sent! I'll get back to you soon.
+          </p>
+        </form>
+      </div>
+
+      <!-- Social Links Card -->
+      <div class="col-span-5 flex flex-col gap-4 fade-in-up" style="animation-delay:0.65s;">
+
+        <!-- GitHub -->
+        <div class="bento-card flex-1" style="box-shadow: 4px 4px 0px #0D0D0D;">
+          <div class="section-marker mb-3">◈ GitHub</div>
+          <p class="font-display font-bold text-lg mb-1">@SUDHIT-D-K</p>
+          <p class="font-mono text-xs text-muted mb-4">Source code · Projects · Repositories</p>
+          <!-- 🔧 TO CUSTOMIZE: Replace href with your GitHub profile URL -->
+          <a href="https://github.com/SUDHIT-D-K"
+             target="_blank" rel="noopener noreferrer"
+             class="social-btn w-full justify-center"
+             id="github-social-btn"
+             aria-label="Visit Sudhit's GitHub profile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            GitHub Profile ↗
+          </a>
+        </div>
+
+        <!-- LinkedIn & Email -->
+        <div class="bento-card card-accent-green flex-1" style="box-shadow: 4px 4px 0px #0D0D0D;">
+          <div class="section-marker text-white/50 mb-3">◈ Connect</div>
+          <div class="flex flex-col gap-3">
+            <!-- 🔧 TO CUSTOMIZE: Replace href with your LinkedIn URL -->
+            <a href="https://linkedin.com/in/sudhit-d-kaller"
+               target="_blank" rel="noopener noreferrer"
+               class="social-btn"
+               style="border-color:rgba(250,250,248,0.4);background:rgba(250,250,248,0.1);color:#FAFAF8;"
+               id="linkedin-btn"
+               aria-label="Visit Sudhit's LinkedIn profile">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+              LinkedIn ↗
+            </a>
+            <!-- 🔧 TO CUSTOMIZE: Replace href with your email address -->
+            <a href="mailto:sudhitdkaller@gmail.com"
+               class="social-btn"
+               style="border-color:rgba(250,250,248,0.4);background:rgba(250,250,248,0.1);color:#FAFAF8;"
+               id="email-btn"
+               aria-label="Send email to Sudhit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              Send Email ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== FOOTER ===== -->
+      <div class="col-span-full border-t-2 border-ink pt-6 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 fade-in-up"
+           style="animation-delay:0.7s;" role="contentinfo">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 bg-ink flex items-center justify-center">
+            <span class="text-canvas font-display font-bold text-xs">SDK</span>
+          </div>
+          <span class="font-mono text-xs text-muted uppercase tracking-widest">Sudhit D Kaller · 2026</span>
+        </div>
+        <p class="font-mono text-xs text-muted">
+          Built with HTML · Tailwind CSS · Vanilla JS · ❤
+        </p>
+        <div class="flex items-center gap-2 font-mono text-xs text-muted">
+          <span class="pulse-dot" style="width:6px;height:6px;"></span>
+          Open to Opportunities
+        </div>
+      </div>
+
+    </div><!-- end .bento-grid -->
+  </main>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ─────────────────────────────────────────────────────────
+    // 1. CUSTOM CURSOR
+    // ─────────────────────────────────────────────────────────
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left  = mouseX - 4  + 'px';
+      dot.style.top   = mouseY - 4  + 'px';
+    });
+
+    // Ring follows with slight lag
+    (function animateRing() {
+      ringX += (mouseX - ringX - 16) * 0.15;
+      ringY += (mouseY - ringY - 16) * 0.15;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    // Cursor states on interactive elements
+    document.querySelectorAll('a, button, .skill-badge, .roadmap-step, .bento-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.style.transform  = 'scale(3)';
+        ring.style.width     = '48px';
+        ring.style.height    = '48px';
+        ring.style.borderColor = '#FF5733';
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.style.transform  = 'scale(1)';
+        ring.style.width     = '32px';
+        ring.style.height    = '32px';
+        ring.style.borderColor = '#0D0D0D';
+      });
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 2. SCROLL FADE-IN OBSERVER
+    // ─────────────────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+    // ─────────────────────────────────────────────────────────
+    // 3. ROADMAP STEP INTERACTION
+    // ─────────────────────────────────────────────────────────
+    document.querySelectorAll('.roadmap-step').forEach(step => {
+      const activate = () => {
+        // Remove active from all
+        document.querySelectorAll('.roadmap-step').forEach(s => {
+          s.querySelector('.step-num').style.background    = '';
+          s.querySelector('.step-num').style.borderColor   = 'rgba(250,250,248,0.5)';
+          s.querySelector('.step-num').style.color         = 'white';
+        });
+        // Activate this
+        step.querySelector('.step-num').style.background  = 'rgba(250,250,248,0.95)';
+        step.querySelector('.step-num').style.borderColor = 'rgba(250,250,248,0.95)';
+        step.querySelector('.step-num').style.color       = '#5B21B6';
+      };
+      step.addEventListener('click', activate);
+      step.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') activate(); });
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 4. CONTACT FORM SUBMIT (demo — no backend)
+    // ─────────────────────────────────────────────────────────
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      const success = document.getElementById('formSuccess');
+
+      btn.textContent = 'Sending...';
+      btn.disabled    = true;
+
+      // Simulate async send
+      setTimeout(() => {
+        btn.textContent = '✓ Sent!';
+        success.classList.remove('hidden');
+        document.getElementById('contactForm').reset();
+        setTimeout(() => {
+          btn.textContent = 'Send Message ↗';
+          btn.disabled    = false;
+          success.classList.add('hidden');
+        }, 4000);
+      }, 1200);
+    }
+
+    // ─────────────────────────────────────────────────────────
+    // 5. SMOOTH SCROLL NAV HIGHLIGHT
+    // ─────────────────────────────────────────────────────────
+    const sections = ['hero','about','skills','mediscan','projects','contact'];
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) current = id;
+      });
+      navLinks.forEach(link => {
+        link.style.background   = '';
+        link.style.color        = '';
+        link.style.borderColor  = 'transparent';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.background  = '#0D0D0D';
+          link.style.color       = '#F5F2ED';
+          link.style.borderColor = '#0D0D0D';
+        }
+      });
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 6. SKILL BADGE — PROFICIENCY LEVEL TOOLTIP ENHANCEMENT
+    // ─────────────────────────────────────────────────────────
+    // Already handled via CSS :hover — JS not required.
+
+    // ─────────────────────────────────────────────────────────
+    // 7. GLITCH TEXT HOVER — triggered by CSS :hover via data-text
+    // ─────────────────────────────────────────────────────────
+    // Handled in CSS above.
+
+    console.log('%c🚀 Sudhit D Kaller · Portfolio 2026', 'font-family:Space Mono;font-size:14px;color:#FF5733;font-weight:bold;');
+    console.log('%cBuilt with Neo-Brutalist Bento Grid Design', 'font-family:Space Mono;font-size:11px;color:#5B21B6;');
+  </script>
+</body>
+</html>
